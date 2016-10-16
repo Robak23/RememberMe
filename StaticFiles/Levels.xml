@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Levels>
+  <Level id='1'>
+    <BoardSize>
+      <x>4</x>
+      <z>4</z>
+    </BoardSize>
+    <Path>1,3,2,3,1,1,1</Path>
+    <BoardTexture>GrassTexture</BoardTexture>
+  </Level>
+  <Level id='2'>
+    <BoardSize>
+      <x>4</x>
+      <z>4</z>
+    </BoardSize>
+    <Path>1,3,2,3,1,1,1</Path>
+    <BoardTexture>SandTexture</BoardTexture>
+  </Level>
+</Levels>

@@ -37,8 +37,8 @@ public class SpawnBoard : MonoBehaviour
             for (var j = 0; j < zSize; j++)
             {
                 var boardElement =
-                    (GameObject) Instantiate(BoardCube, new Vector3(i, -1, j), new Quaternion(0f, -90f, -90f, 0f));
-                boardElement.GetComponent<Renderer>().material.mainTexture = Resources.Load<Texture>(textureName);
+                    (GameObject) Instantiate(BoardCube, new Vector3(i, -1, j), new Quaternion(0f, 0f, 0f, 0f));
+                boardElement.GetComponentInChildren<Renderer>().material.mainTexture = Resources.Load<Texture>(textureName);
             }
         }
     }

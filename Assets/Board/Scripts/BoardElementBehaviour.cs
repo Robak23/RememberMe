@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BoardElementBehaviour : MonoBehaviour {
+public class BoardElementBehaviour : MonoBehaviour
+{
+    private Animator _animator;
+    private bool _active;
+    // Use this for initialization
+    void Start ()
+    {
+	    _animator = gameObject.GetComponent<Animator>();
+    }
 
-	// Use this for initialization
-	void Start () {
+    // Update is called once per frame
+    void Update ()
+    {
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        _active = !_active;
+        _animator.SetBool("Active", _active);
+    }
 }

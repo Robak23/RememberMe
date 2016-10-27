@@ -10,7 +10,7 @@ namespace Assets.Scripts
         private bool _inMovement;
 
         private float _currentJumpTime;
-        private float _tranformProgress;
+        private float _transformProgress;
 
         private Vector3 _startPosition;
         private Vector3 _endPosition;
@@ -29,13 +29,14 @@ namespace Assets.Scripts
                 _startPosition = gameObject.transform.position;
                 _endPosition = GetInputDirection();
             }
+
             if (_inMovement)
             {
                 _currentJumpTime += Time.deltaTime;
-                _tranformProgress = _currentJumpTime/JumpTime;
-                gameObject.transform.position = Vector3.Lerp(_startPosition, _endPosition, _tranformProgress);
+                _transformProgress = _currentJumpTime/JumpTime;
+                gameObject.transform.position = Vector3.Lerp(_startPosition, _endPosition, _transformProgress);
 
-                if (_tranformProgress > 0.8f)
+                if (_transformProgress > 0.8f)
                 {
                     TriggerAnimation = false;
                 }
@@ -54,7 +55,7 @@ namespace Assets.Scripts
                 || Input.GetButtonDown("left") 
                 || Input.GetButtonDown("right"))
             {
-                _tranformProgress = 0f;
+                _transformProgress = 0f;
                 _currentJumpTime = 0f;
                 _inMovement = true;
                 TriggerAnimation = true;

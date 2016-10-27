@@ -8,17 +8,16 @@ using System.Xml.XPath;
 
 public class SpawnBoard : MonoBehaviour
 {
-    public int LevelId = 1;
     public List<int> PathWay;
 
     public GameObject BoardCube;
 
-    void Start()
+    public void Spawn(int levelId)
     {
         XmlDocument levels = new XmlDocument();
         levels.Load("StaticFiles/Levels.xml");
 
-        var level = levels.SelectSingleNode(String.Format("//*[@id='{0}']", LevelId));
+        var level = levels.SelectSingleNode(string.Format("//*[@id='{0}']", levelId));
 
         // Read board size
         var boardSize = level["BoardSize"];

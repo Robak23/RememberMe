@@ -19,7 +19,6 @@ public class BoardElementBehaviour : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        _active = !_active;
-        _animator.SetBool("Active", _active);
+        _animator.SetBool("Active", true);
     }
 }

@@ -75,6 +75,7 @@
     <Compile Include="Assets\Player\Scripts\AnimationScript\JumpAnimation.cs" />
     <Compile Include="Assets\Player\Scripts\PlayerScripts\PlayerBounce.cs" />
     <Compile Include="Assets\TothPlayer\Scripts\AIPlayPath.cs" />
+    <Compile Include="Assets\TothPlayer\Scripts\JumpAnimationScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

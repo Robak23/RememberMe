@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class AIPlayPath : MonoBehaviour
 {
-    public GameObject GameController;
     public bool StartPlayingPath;
     public bool TriggerAnimation;
     public float JumpTime;
@@ -20,11 +19,11 @@ public class AIPlayPath : MonoBehaviour
     private Vector3 _endPosition;
 
 	// Use this for initialization
-	void Start ()
+	public void Initialize (List<int> pathWay)
 	{
 	    TriggerAnimation = false;
 	    FinishedPlayingPath = false;
-	    _path = GameController.GetComponent<SpawnBoard>().PathWay;
+	    _path = pathWay;
 	    _inMovement = false;
 	    _pathStep = 0;
 	}

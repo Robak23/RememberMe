@@ -8,23 +8,44 @@ public class GameFlow : MonoBehaviour
     public GameObject AIPlayer;
     public GameObject Player;
 
-    private XmlDocument saveFile;
+    private XmlDocument _saveFile;
 
-	void Start ()
+    private GameObject _aiPlayer;
+    private GameObject _player;
+
+    private bool _playerSpawned;
+
+    void Start ()
 	{
 	    LoadSaveFile();
-	    //ShowMainMenu();
-	}
+        _aiPlayer = new GameObject();
+        _player = new GameObject();
+        //ShowMainMenu();
+    }
 
     private void LoadSaveFile()
     {
-        saveFile = new XmlDocument();
-        saveFile.Load("StaticFiles/SaveFile.xml");
+        _saveFile = new XmlDocument();
+        _saveFile.Load("StaticFiles/SaveFile.xml");
+        
+    }
+
+    private void DeactivateBoardAnimation()
+    {
+        var boardElements = GameObject.FindGameObjectsWithTag("Board");
+        foreach (var boardElement in boardElements)
+        {
+            boardElement.GetComponentInChildren<Animator>().SetBool("Active", false);
+        }
     }
 
     void Update ()
     {
-        
+        if (_aiPlayer == null && !_playerSpawned)
+        {
+            DeactivateBoardAnimation();
+            SpawnPlayer();
+        }
     }
 
     void OnGUI()
@@ -36,17 +57,26 @@ public class GameFlow : MonoBehaviour
         }
     }
 
+    private void SpawnPlayer()
+    {
+        _playerSpawned = true;
+        _player = (GameObject) Instantiate(Player, new Vector3(0, 0, 0), new Quaternion(0f, 0f, 0f, 0f));
+        var save = _saveFile["Save"];
+        _player.GetComponentInChildren<Renderer>().material.mainTexture = Resources.Load<Texture>(save["Texture"].InnerText);
+    }
+
     private void SpawnAIPlayer()
     {
-        var aiPlayer = (GameObject)Instantiate(AIPlayer, new Vector3(0, 0, 0), new Quaternion(0f, 0f, 0f, 0f));
-
-        aiPlayer.GetComponent<AIPlayPath>().Initialize(gameObject.GetComponent<SpawnBoard>().PathWay);
-        aiPlayer.GetComponent<AIPlayPath>().StartPlayingPath = true;
+        _aiPlayer = (GameObject)Instantiate(AIPlayer, new Vector3(0, 0, 0), new Quaternion(0f, 0f, 0f, 0f));
+        var aiPlayerPath = _aiPlayer.GetComponent<AIPlayPath>();
+        aiPlayerPath.Initialize(gameObject.GetComponent<SpawnBoard>().PathWay);
+        aiPlayerPath.PauseTime = 500; // change depending on level
+        _aiPlayer.GetComponent<AIPlayPath>().StartPlayingPath = true;
     }
 
     private void SpawnBoard()
     {
-        var save = saveFile["Save"];
+        var save = _saveFile["Save"];
         gameObject.GetComponent<SpawnBoard>().Spawn(Convert.ToInt32(save["Level"].InnerText));
     }
 

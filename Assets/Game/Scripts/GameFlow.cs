@@ -7,11 +7,13 @@ public class GameFlow : MonoBehaviour
 {
     public GameObject AIPlayer;
     public GameObject Player;
+    public GameObject Logo;
 
     private XmlDocument _saveFile;
 
     private GameObject _aiPlayer;
     private GameObject _player;
+    private GameObject _logo;
 
     private bool _playerSpawned;
 
@@ -20,7 +22,7 @@ public class GameFlow : MonoBehaviour
 	    LoadSaveFile();
         _aiPlayer = new GameObject();
         _player = new GameObject();
-        //ShowMainMenu();
+        ShowMainMenu();
     }
 
     private void LoadSaveFile()
@@ -48,13 +50,12 @@ public class GameFlow : MonoBehaviour
         }
     }
 
-    void OnGUI()
+    public void StartButtonClicked(GameObject button)
     {
-        if (GUI.Button(new Rect(10, 70, 50, 30), "Play"))
-        {
-            SpawnBoard();
-            SpawnAIPlayer();
-        }
+        button.gameObject.SetActive(false);
+        Destroy(_logo.gameObject);
+        SpawnBoard();
+        SpawnAIPlayer();
     }
 
     private void SpawnPlayer()
@@ -82,6 +83,6 @@ public class GameFlow : MonoBehaviour
 
     private void ShowMainMenu()
     {
-        throw new System.NotImplementedException();
+       _logo = (GameObject)Instantiate(Logo, new Vector3(-7, 3f, 0), new Quaternion(0f, 0f, 0f, 0f));
     }
 }
